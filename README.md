@@ -1,4 +1,4 @@
-#Simple Web Crawler
+#Simple Crawler
 
 Given a starting URL, it visits every reachable page under that domain, up to a given depth.
 
@@ -74,9 +74,11 @@ To install this gem onto your local machine, run `bundle exec rake install`.
 
 Run `rake spec` to run the tests.
 
+There is a CLI version of this gem available at https://github.com/uh-joan/simple_crawler.
+
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/uh-joan/simple_crawler. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/uh-joan/simple_crawler.
 
 
 ## License
