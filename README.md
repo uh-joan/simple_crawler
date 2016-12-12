@@ -74,7 +74,7 @@ To install this gem onto your local machine, run `bundle exec rake install`.
 
 Run `rake spec` to run the tests.
 
-There is a CLI version of this gem available at https://github.com/uh-joan/simple_crawler.
+There is a CLI version of this gem available at https://github.com/uh-joan/crawler.
 
 ## Contributing
 
