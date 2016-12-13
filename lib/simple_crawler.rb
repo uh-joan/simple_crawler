@@ -39,7 +39,7 @@ module SimpleCrawler
       end
       unless doc.nil?
         assets = extract_assets doc
-        { url: url, assets: assets.to_json }
+        { url: url, assets: assets }
       end
     end
 
