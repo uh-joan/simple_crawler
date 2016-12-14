@@ -6,9 +6,9 @@ require 'json'
 
 module SimpleCrawler
   class Crawler
-    def initialize (url)
-      @url    = url
-      @doc    = Nokogiri::HTML(open(@url, "Accept-Encoding" => "plain", "User-Agent" => "chrome"))
+    def initialize(url)
+      @url = url
+      @doc = get_nokogiri url
       @output = []
     end
 
@@ -19,23 +19,37 @@ module SimpleCrawler
           links = extract_links @doc
           links.each do |link|
             if is_a_partial_link_and_of_depth(link, depth)
-              temp << save_assets( @url + link )
+              assets = get_assets( @url + link )
+              unless assets.nil?
+                temp << assets
+              end
             end
           end
           @output.unshift(temp)
           crawl(depth - 1)
         else
-          @output.unshift( save_assets( @url ) )
+          assets = get_assets( @url )
+          unless assets.nil?
+            @output.unshift( assets )
+          end
         end
       end
       @output.flatten(1)
     end
 
-    def save_assets (url)
+    def get_assets (url)
       begin
-        doc = Nokogiri::HTML(open(url, "Accept-Encoding" => "plain", "User-Agent" => "chrome"))
+        doc = get_nokogiri url
       rescue
-        doc = nil
+        if url.start_with?('https')
+          url = url.gsub('https', 'http')
+          begin
+            doc = get_nokogiri url
+          rescue
+            doc = nil
+          end
+        end
+
       end
       unless doc.nil?
         assets = extract_assets doc
@@ -43,11 +57,15 @@ module SimpleCrawler
       end
     end
 
+    def get_nokogiri (url)
+      Nokogiri::HTML(open(url, 'Accept-Encoding' => 'plain', 'User-Agent' => 'chrome'))
+    end
+
     def is_a_partial_link_and_of_depth (link, depth)
       begin
         # account only for partial links
         route_elements = link.split('/')
-        (route_elements[0].empty? && route_elements.count == depth+1) ? true : false
+        (route_elements[0].empty? && route_elements.count == depth+1 ) ? true : false
       rescue
         false
       end
@@ -79,5 +97,6 @@ module SimpleCrawler
         end
       }
     end
+
   end
 end
