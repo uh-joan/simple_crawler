@@ -64,7 +64,7 @@ module SimpleCrawler
       assets = []
       assets << doc.xpath('//link[not(@rel="alternate")][not(@rel="canonical")][not(@rel="publisher")]').map{ |link| link['href'] }
       assets << doc.xpath('//script').map{ |link| link['src'] }
-      assets << doc.xpath('//image').map { |link| link['src'] }
+      assets << doc.xpath('//img').map { |link| link['src'] }
       # get rid of nils, duplicates and attach the domain to only the assets with partial links
       assets.flatten.compact.uniq.map { |asset| asset.start_with?('/') && !asset.start_with?('//')? @url+asset : asset }
     end
