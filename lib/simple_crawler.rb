@@ -66,7 +66,18 @@ module SimpleCrawler
       assets << doc.xpath('//script').map{ |link| link['src'] }
       assets << doc.xpath('//img').map { |link| link['src'] }
       # get rid of nils, duplicates and attach the domain to only the assets with partial links
-      assets.flatten.compact.uniq.map { |asset| asset.start_with?('/') && !asset.start_with?('//')? @url+asset : asset }
+      assets.flatten.compact.uniq.map { |asset|
+        if asset.start_with?('/') && !asset.start_with?('//')
+          # it a good partial link
+          @url+asset
+        elsif asset.start_with?('//')
+          # assets might be a full url
+          'https:'+asset
+        else
+          # something else
+          asset
+        end
+      }
     end
   end
 end
