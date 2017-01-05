@@ -14,11 +14,11 @@ describe SimpleCrawler do
   context '#extract' do
     let (:doc) { Nokogiri::HTML(open(url, "Accept-Encoding" => "plain", "User-Agent" => "chrome")) }
     it 'should extract the links from a url' do
-      expect(crawler.extract_links(doc).count).to eq(47)
+      expect(crawler.extract_links(doc).count).to eq(50)
     end
 
     it 'should extract the assets from a url' do
-      expect(crawler.extract_assets(doc).count).to eq(16)
+      expect(crawler.extract_assets(doc).count).to eq(29)
     end
   end
 
@@ -29,17 +29,17 @@ describe SimpleCrawler do
     end
 
     it 'crawls the url with depth 1' do
-      expect(crawler.crawl(1).count).to eq(37)
+      expect(crawler.crawl(1).count).to eq(36)
       end
 
 
     it 'crawls the url with depth 2' do
-      expect(crawler.crawl(2).count).to eq(43)
+      expect(crawler.crawl(2).count).to eq(42)
     end
 
 
     it 'crawls the url with depth 3' do
-      expect(crawler.crawl(3).count).to eq(44)
+      expect(crawler.crawl(3).count).to eq(42)
     end
   end
 
