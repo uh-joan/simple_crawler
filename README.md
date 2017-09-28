@@ -26,7 +26,7 @@ For example:
   ..
 ]
 ```
-Live [demo](http://apicake.io/crawler)
+Live [demo](http://anitin.net/crawler)
 
 ## Depth
 
