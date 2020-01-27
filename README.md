@@ -26,7 +26,6 @@ For example:
   ..
 ]
 ```
-Live [demo](http://anitin.net/crawler)
 
 ## Depth
 
